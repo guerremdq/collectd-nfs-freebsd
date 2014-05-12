@@ -14,6 +14,7 @@ def generate_stats():
     stats_file = open(STATS_FILE, "w")
     stats = os.popen(nfs_command)
     stats_file.write(stats.read())
+    stats_file.close()
 
 
 def clean():
