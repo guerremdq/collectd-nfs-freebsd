@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # Collectd
-# Facundo Guerrero < dc-alerts@olx.com >
+# Facundo Guerrero < guerremdq@gmail.com >
 # FreeBSD cacti NFS stats parser
 import os
 import collectd
