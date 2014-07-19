@@ -35,7 +35,7 @@ def read(data=None):
             break
         i = 0
         for x in line1:
-            a[line1[i]] = line2[i]
+            a[line1[i]] = int(line2[i])
             i = i + 1
     f.close()
     send_stats(a)
@@ -48,12 +48,14 @@ def send_stats(data=None):
         dispatch_stat(data[x], x.lower())
 
 
-def dispatch_stat(result, name):
+def dispatch_stat(value, name):
     """Read a key from info response data and dispatch a value"""
-    if result is None:
+    if value is None:
         collectd.warning('nfs plugin: Value not found for %s' % name)
         return
-    value = int(result)
+    if value < 0:
+        collectd.warning('nfs plugin: Value is negative for %s' % name)
+        value = 0
     collectd.info('Sending value[counter]: %s=%s' % (name, value))
 
     val = collectd.Values(plugin='nfs')
